@@ -1,23 +1,11 @@
 import "./App.css";
-import { useReducer } from "react";
-
-function reducer(state, action) {
-  switch (action.type) {
-    case ";made_move": {
-    }
-  }
-}
+import Square from "./components/Square/Square";
 
 function App() {
   // TODO: Add useReducer hook to track state of: board, turn, winner
-  const [state, dispatch] = useReducer(reducer, {
-    board: Array[9].fill[""],
-    turn: "X",
-    winner: null,
-  });
-  // useReducer good when multiple peices of state changing at same time
-
-  return <h1>Tic Tac Toe</h1>;
+  const board = new Array(9).fill("");
+  return board.map((square, index) => (
+    <Square key={index} id={index} handleClick={() => {}} />
+  ));
 }
-
 export default App;
