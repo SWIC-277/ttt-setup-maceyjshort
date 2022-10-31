@@ -4,21 +4,26 @@ import Square from "./Square";
 
 describe("Square", () => {
   it("renders a square with a marker and the correct id", () => {
-    render(<Square marker="X" id={0} />);
-    const square = screen.getByRole("button", { name: "X" });
-    expect(square).toHaveAttribute("id", "0");
+    const ID = 0;
+    const MARKER = "X";
+
+    render(<Square marker={MARKER} id={ID} />);
+    const square = screen.getByRole("button", { name: MARKER });
+    expect(square).toHaveAttribute("id", ID.toString());
   });
 
   it("renders a square without a marker", () => {
+    const ID = 0;
+
     render(<Square marker id={0} />);
     const square = screen.getByRole("button");
 
-    expect(square).toHaveAttribute("id", "0");
+    expect(square).toHaveAttribute("id", ID.toString());
   });
 
   it("calls the click handler function whenever clicked", async () => {
     const ID = 0;
-    const handleClick = jest.fn((event) => event.target.id); // mock function
+    const handleClick = jest.fn(); // mock function
     const user = userEvent.setup();
 
     render(<Square id={ID} handleClick={handleClick} />);
@@ -27,9 +32,6 @@ describe("Square", () => {
     // simulating a click even happens asynchronously
     await user.click(square); // await requires function to be asynchronous
 
-    expect(handleClick).toHaveBeenCalled();
-
-    // TODO: Expect the handleClick function to be called with the correcti id
-    expect(handleClick.mock.results[0].value).toBe(ID.toString());
+    expect(handleClick).toBeCalled();
   });
 });
