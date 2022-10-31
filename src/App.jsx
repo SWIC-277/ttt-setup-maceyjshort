@@ -1,11 +1,18 @@
 import "./App.css";
 import Square from "./components/Square/Square";
+import useGame from "./hooks/useGame";
 
 function App() {
-  // TODO: Add useReducer hook to track state of: board, turn, winner
-  const board = new Array(9).fill("");
-  return board.map((square, index) => (
-    <Square key={index} id={index} handleClick={() => {}} />
-  ));
+  const { board, makeMove, winner, turn } = useGame();
+  return (
+    <main>
+      <div className="board">
+        {board.map((square, index) => (
+          <Square key={index} id={index} handleClick={() => {}} />
+        ))}
+      </div>
+    </main>
+  );
 }
 export default App;
+// when I got rid of my div my board disappeared... I don't know why... Did I mess up following along?
