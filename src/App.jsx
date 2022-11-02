@@ -6,6 +6,10 @@ function App() {
   const { board, winner, makeMove } = useGame();
   return (
     <main>
+      <h1>Tic Tac Toe</h1>
+
+      {winner && <p>{winner} WINS!</p>}
+
       <div className="board">
         {board.map((square, index) => (
           <Square
