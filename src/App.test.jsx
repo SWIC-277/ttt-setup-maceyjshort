@@ -1,9 +1,29 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import App from "./App";
 
-test("renders tic tac toe", () => {
-  render(<App />);
-  const squares = screen.getByAllRoles("button");
+describe("App", () => {
+  it("renders tic tac toe", () => {
+    render(<App />);
 
-  expect(squares).toHaveLength(9);
+    const squares = screen.getAllByRole("button");
+
+    expect(squares).toHaveLength(9);
+  });
+
+  it("alternates 'X' and 'O' whenever clicking squares", async () => {
+    const user = userEvent.setup();
+
+    render(<App />);
+
+    const squares = screen.getAllByRole("button");
+
+    await user.click(squares[0]);
+    await user.click(squares[1]);
+    await user.click(squares[2]);
+
+    expect(squares[0]).toHaveTextContent("X");
+    expect(squares[1]).toHaveTextContent("O");
+    expect(squares[2]).toHaveTextContent("X");
+  });
 });
