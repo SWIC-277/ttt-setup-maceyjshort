@@ -32,3 +32,17 @@ it("updates the winner after winning a move", () => {
 
   expect(newState.winner).toBe("X");
 });
+
+it("makes sure that a player cannot skip a move", () => {
+  const state = {
+    board: ["X", "O", "X", "O", "X", "O", null, null, null],
+    turn: "X",
+  };
+  const action = {
+    type: "made_move",
+    index: 6,
+  }
+  // I don't know how to do this
+  const newState = reducer(state, action);
+  expect(newState.)
+});
